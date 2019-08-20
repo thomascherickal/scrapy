@@ -2,8 +2,7 @@
 jmespath
 pytest
 pytest-cov
-#pytest-twisted
--e git+https://github.com/pytest-dev/pytest-twisted@81b91f17#egg=pytest-twisted
+pytest-twisted >= 1.11
 pytest-xdist
 sybil
 testfixtures
