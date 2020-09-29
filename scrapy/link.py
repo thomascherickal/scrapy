@@ -6,7 +6,7 @@ its documentation in: docs/topics/link-extractors.rst
 """
 
 
-class Link(object):
+class Link:
     """Link objects represent an extracted link by the LinkExtractor."""
 
     __slots__ = ['url', 'text', 'fragment', 'nofollow']
@@ -14,19 +14,25 @@ class Link(object):
     def __init__(self, url, text='', fragment='', nofollow=False):
         if not isinstance(url, str):
             got = url.__class__.__name__
-            raise TypeError("Link urls must be str objects, got %s" % got)
+            raise TypeError(f"Link urls must be str objects, got {got}")
         self.url = url
         self.text = text
         self.fragment = fragment
         self.nofollow = nofollow
 
     def __eq__(self, other):
-        return self.url == other.url and self.text == other.text and \
-            self.fragment == other.fragment and self.nofollow == other.nofollow
+        return (
+            self.url == other.url
+            and self.text == other.text
+            and self.fragment == other.fragment
+            and self.nofollow == other.nofollow
+        )
 
     def __hash__(self):
         return hash(self.url) ^ hash(self.text) ^ hash(self.fragment) ^ hash(self.nofollow)
 
     def __repr__(self):
-        return 'Link(url=%r, text=%r, fragment=%r, nofollow=%r)' % \
-            (self.url, self.text, self.fragment, self.nofollow)
+        return (
+            f'Link(url={self.url!r}, text={self.text!r}, '
+            f'fragment={self.fragment!r}, nofollow={self.nofollow!r})'
+        )

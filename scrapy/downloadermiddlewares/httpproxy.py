@@ -1,14 +1,13 @@
 import base64
-from six.moves.urllib.parse import unquote, urlunparse
-from six.moves.urllib.request import getproxies, proxy_bypass
-from urllib.request import _parse_proxy
+from urllib.parse import unquote, urlunparse
+from urllib.request import getproxies, proxy_bypass, _parse_proxy
 
 from scrapy.exceptions import NotConfigured
 from scrapy.utils.httpobj import urlparse_cached
 from scrapy.utils.python import to_bytes
 
 
-class HttpProxyMiddleware(object):
+class HttpProxyMiddleware:
 
     def __init__(self, auth_encoding='latin-1'):
         self.auth_encoding = auth_encoding
@@ -25,7 +24,7 @@ class HttpProxyMiddleware(object):
 
     def _basic_auth_header(self, username, password):
         user_pass = to_bytes(
-            '%s:%s' % (unquote(username), unquote(password)),
+            f'{unquote(username)}:{unquote(password)}',
             encoding=self.auth_encoding)
         return base64.b64encode(user_pass)
 
